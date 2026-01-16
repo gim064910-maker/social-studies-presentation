@@ -8,35 +8,47 @@
     <!-- Link the CSS file directly -->
     <link rel="stylesheet" href="./index.css" />
 
-    <!-- Tailwind CDN for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 
+      FIX: Configure Tailwind BEFORE loading the CDN script.
+      This ensures custom fonts (Playfair Display, etc.) are recognized immediately.
+    -->
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
-              tech: ['Rajdhani', 'sans-serif'],
-              brush: ['Comforter Brush', 'cursive'],
+      tailwind = {
+        config: {
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+                serif: ['Playfair Display', 'serif'],
+                tech: ['Rajdhani', 'sans-serif'],
+                brush: ['Comforter Brush', 'cursive'],
+              },
             },
           },
-        },
+        }
       }
     </script>
-  <script type="importmap">
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 
+      FIX: Use React 18 via Importmap to avoid version conflicts.
+      This ensures the app runs stably without complex build steps.
+    -->
+    <script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.263.1",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
     "vite": "https://esm.sh/vite@^7.3.1",
     "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
